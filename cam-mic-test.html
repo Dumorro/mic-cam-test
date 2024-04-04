@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam e Microfone</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #202124;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+        }
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="video" autoplay muted></video>
+    </div>
+    <script>
+        'use strict';
+
+        const video = document.getElementById('video');
+        const constraints = { audio: true, video: true }; // incluindo áudio e vídeo
+
+        navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((err) => {
+            console.error('Erro ao acessar a webcam/microfone: ', err);
+        });
+    </script>
+</body>
+</html>
