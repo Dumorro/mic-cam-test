@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam e Microfone</title>
+    <script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f3f2f1;
+        }
+        .container {
+            max-width: 640px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Teste de Webcam e Microfone</h2>
+        </div>
+        <fluent-card>
+            <video id="video" autoplay></video>
+        </fluent-card>
+        <script>
+            'use strict';
+
+            const video = document.getElementById('video');
+            const constraints = { audio: true, video: true };
+
+            navigator.mediaDevices.getUserMedia(constraints)
+            .then((stream) => {
+                video.srcObject = stream;
+            })
+            .catch((err) => {
+                console.error('Ocorreu um erro ao tentar acessar a webcam/microfone: ', err);
+            });
+        </script>
+    </div>
+</body>
+</html>
